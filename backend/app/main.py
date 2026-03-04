@@ -10,7 +10,7 @@ from app.api.posters import router as poster_router
 
 load_dotenv()
 limiter = Limiter(key_func=get_remote_address)
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+CORS_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")]
 
 app = FastAPI(
     title="City Map Poster API",
