@@ -146,9 +146,9 @@ def create_poster(
     # --- Map ---
     G = ox.graph_from_point(
         point,
-        dist=distance,
+       dist=min(distance, 15000),
         dist_type="bbox",
-        network_type="all",
+        network_type="drive",
     )
 
     ox.plot_graph(
@@ -161,6 +161,9 @@ def create_poster(
         show=False,
         close=False,
     )
+    del G  # free memory immediately after plotting
+    import gc
+    gc.collect()
 
     create_gradient_fade(ax, theme["gradient_color"], "bottom")
     create_gradient_fade(ax, theme["gradient_color"], "top")
