@@ -1,5 +1,8 @@
+from app.core.celery_app import celery_app
+from app.services.poster_service import generate_poster
 import logging
 logger = logging.getLogger(__name__)
+
 
 @celery_app.task(bind=True, name="tasks.generate_poster")
 def generate_poster_task(self, *, city: str, country: str, theme: str,
