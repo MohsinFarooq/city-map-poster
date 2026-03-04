@@ -1,14 +1,14 @@
 from celery import Celery
 from dotenv import load_dotenv
+import ssl
 import os
 
 load_dotenv()
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
-# Use SSL if rediss:// scheme
 is_ssl = REDIS_URL.startswith("rediss://")
-redis_options = {"ssl_cert_reqs": None} if is_ssl else {}
+redis_options = {"ssl_cert_reqs": ssl.CERT_NONE} if is_ssl else {}
 
 celery_app = Celery(
     "city_map_poster",
