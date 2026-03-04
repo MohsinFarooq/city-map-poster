@@ -30,9 +30,16 @@ export async function getPosterJobStatus(jobId: string): Promise<JobStatus> {
 }
 
 export function getPosterDownloadUrl(downloadUrl: string): string {
+  // If already absolute URL (Cloudinary), return as-is
+  if (downloadUrl.startsWith("http")) {
+    return downloadUrl;
+  }
   return `${SERVER_BASE}${downloadUrl}`;
 }
 
 export function getPosterImageUrl(downloadUrl: string): string {
+  if (downloadUrl.startsWith("http")) {
+    return downloadUrl;
+  }
   return `${SERVER_BASE}${downloadUrl}`;
 }
