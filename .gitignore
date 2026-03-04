@@ -1,0 +1,57 @@
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# =========================
+# Backend generated files
+# =========================
+backend/app/assets/posters/
+backend/posters/
+*.png
+*.pdf
+
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+dist/
+build/
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# =========================
+# Coverage / Testing
+# =========================
+coverage/
