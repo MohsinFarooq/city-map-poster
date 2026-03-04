@@ -85,15 +85,22 @@ export function usePosterGeneration() {
     setStep("Queuing job…");
   };
 
-  const download = () => {
+  const download = async () => {
     if (!result) return;
     const url = getPosterDownloadUrl(result.download_url);
+
+    // Fetch the image and trigger download
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
-    a.href = url;
-    a.download = result.filename;
+    a.href = blobUrl;
+    a.download = result.filename || "city-map-poster.png";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(blobUrl);
   };
 
   return { status, result, error, step, generate, reset, download };
