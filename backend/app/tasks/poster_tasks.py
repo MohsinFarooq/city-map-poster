@@ -1,6 +1,5 @@
-from app.core.celery_app import celery_app
-from app.services.poster_service import generate_poster
-
+import logging
+logger = logging.getLogger(__name__)
 
 @celery_app.task(bind=True, name="tasks.generate_poster")
 def generate_poster_task(self, *, city: str, country: str, theme: str,
@@ -25,5 +24,5 @@ def generate_poster_task(self, *, city: str, country: str, theme: str,
         }
 
     except Exception as e:
-        self.update_state(state="FAILURE", meta={"error": str(e)})
+        logger.error(f"Poster generation failed: {str(e)}", exc_info=True)
         raise
