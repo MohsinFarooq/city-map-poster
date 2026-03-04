@@ -6,6 +6,10 @@ Users enter a city name, country, and styling preferences through a web interfac
 
 ---
 
+**Live at [city-map-poster.vercel.app](https://city-map-poster.vercel.app)**
+
+---
+
 ## ✨ Features
 
 - Generate detailed city map posters from OpenStreetMap data
@@ -38,3 +42,14 @@ Users enter a city name, country, and styling preferences through a web interfac
 - **OpenStreetMap** — map data source
 
 ---
+
+---
+
+## 🚀 Hosting
+
+| Service                              | Purpose                     |
+| ------------------------------------ | --------------------------- |
+| [Vercel](https://vercel.com)         | Frontend                    |
+| [Railway](https://railway.app)       | Backend API + Celery worker |
+| [Upstash](https://upstash.com)       | Redis (message broker)      |
+| [Cloudinary](https://cloudinary.com) | Poster image storage        |
