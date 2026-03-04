@@ -13,8 +13,19 @@ import matplotlib.colors as mcolors
 import numpy as np
 from geopy.geocoders import Nominatim
 
+
+
 from app.schemas.layouts import LAYOUT_CONFIG
 from app.core.config import FONTS_DIR, THEMES_DIR, POSTERS_DIR
+import cloudinary
+import cloudinary.uploader
+import os
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+)
 
 
 # ---------- Fonts & Themes ----------
@@ -230,7 +241,7 @@ def generate_poster(
     distance: int,
     label_mode: str = "city",
     layout: str = "pc",
-) -> Path:
+) -> str:  
     theme_data = load_theme(theme)
     fonts = load_fonts()
     coords = get_coordinates(city, country)
@@ -247,5 +258,12 @@ def generate_poster(
         label_mode=label_mode,
         layout=layout,
     )
+    upload_result = cloudinary.uploader.upload(
+        str(output_file),
+        folder="city-map-posters",
+        resource_type="image",
+    )
 
-    return output_file
+    output_file.unlink(missing_ok=True)
+
+    return upload_result["secure_url"]

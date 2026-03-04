@@ -8,7 +8,7 @@ def generate_poster_task(self, *, city: str, country: str, theme: str,
     try:
         self.update_state(state="PROGRESS", meta={"step": "Fetching map data…"})
 
-        output_path = generate_poster(
+        poster_url = generate_poster(
             city=city,
             country=country,
             theme=theme,
@@ -17,11 +17,11 @@ def generate_poster_task(self, *, city: str, country: str, theme: str,
             layout=layout,
         )
 
-        filename = output_path.name
+        filename = poster_url.split("/")[-1]
         return {
             "status": "success",
             "filename": filename,
-            "download_url": f"/api/posters/download/{filename}",
+            "download_url": poster_url,
         }
 
     except Exception as e:
