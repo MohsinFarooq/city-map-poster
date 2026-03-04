@@ -25,6 +25,7 @@ env/
 # =========================
 backend/app/assets/posters/
 backend/posters/
+backend/cache
 *.png
 *.pdf
 
